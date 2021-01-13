@@ -1,5 +1,4 @@
 const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -20,7 +19,10 @@ module.exports = merge(common, {
         use: {
           loader: require.resolve('babel-loader'),
           options: {
-            presets: ['@babel/preset-env'],
+            /*
+            We set up Babel in our Webpack config to automatically transform JSX to React. Note that @babel/preset-env needs to be specified before @babel/preset-react so that ES6 gets transformed to ES5 before JSX gets transformed to React.
+            */
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
